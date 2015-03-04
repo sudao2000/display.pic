@@ -1,0 +1,140 @@
+<resources>
+
+    <string name="app_name">eoe</string>
+    <string name="action_logout">更换帐号</string>
+    <string name="action_about_app">关于与建议</string>
+    <string name="network_error">网络错误，请检查您的网络连接</string>
+    <string name="dialog_OK">确定</string>
+    <string name="dialog_Cancel">取消</string>
+    <string name="dialog_error_title">错误</string>
+    <string name="dialog_message_title">提示</string>
+    <string name="dialog_message_success">成功</string>
+    <string name="dialog_text_wait">请等待</string>
+    
+    <string name="login_input_user_name">请输入名字</string>
+    <string name="login_input_user_password">请输入密码</string>
+    <string name="login_button_login">登录</string>
+    <string name="login_button_register">注册</string>
+    <string name="login_button_forget_password">忘记用户名或密码？</string>
+    <string name="error_login_error">登陆失败，请确认网络和用户名密码后重试</string>
+    
+    <string name="forget_password_find_password_button">发送邮件</string>
+    <string name="forget_password_send_email">已发送邮件</string>
+    <string name="forget_password_email_error">邮件发送错误，请确认您的邮件地址</string>
+    
+    <string name="register_input_user_password_again">请再次输入密码</string>
+    <string name="register_input_user_email">请输入E-mail地址</string>
+    <string name="error_register_password_not_equals">两次输入密码不一致，请重新输入</string>
+    <string name="error_register_password_null">密码不可为空</string>
+    <string name="error_register_user_name_null">用户名不可空</string>
+    <string name="error_register_email_address_null">E-mail地址不可空</string>
+    <string name="error_register_user_name_repeat">用户名已被注册，请重新填写</string>
+    <string name="error_register_email_repeat">邮箱已被注册，请更换邮箱</string>
+    <string name="success_register_success">注册成功</string>
+    
+    <string name="main_view_person_title">我的成就</string>
+    <string name="main_view_anytime_title">正在做</string>
+    
+    <string name="action_logout_alert_message">确定更换账号么？之前保留的账号信息将被删除。</string>
+    <string name="action_about_app_text">关于作者:\n\thi，大家好，我是“孤独的猫咪神”。\n\t我的微博是:weibo.com/maomishen\n\t感谢您使用此APP。欢迎对本APP提出您宝贵的意见和建议。</string>
+    <string name="action_about_app_doing_list_title">我希望在“正在做”中，加入如下的事情:\n我要提意见:</string>
+    <string name="action_about_app_submit_doing">提交</string>
+    <string name="action_about_app_submit_doing_hint">输入意见或希望添加在“正在做”中的内容。</string>
+    <string name="action_about_app_submit_message_success">感谢您的提交。祝您生活愉快。</string>
+    <string name="action_about_app_submit_message_error">非常抱歉，提交出错。</string>
+    
+    <string name="person_register_time">注册时间:{0}</string>
+    <string name="person_achievement_list_null">暂无成就</string>
+    
+    <string name="doing_list_wait_loading">正在加载</string>
+    <string name="doing_list_error_loading">加载错误，请检查网络</string>
+    
+    <string name="doing_detail_loading">努力查询中！</string>
+    <string name="doing_detail_same_time_title">与您同时在{0}的人有</string>
+    <string name="doing_detail_person">人</string>
+    <string name="doing_detail_get_achievement_title">本次获得的成就</string>
+    <string name="doing_detail_achievement_null">没有获得成就T.T</string>
+    
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- 侧边栏按钮 -->
+    <string name="button_setting">设置</string>
+    <string name="button_feedback">反馈</string>
+    <string name="button_about">关于</string>
+
+    <!-- 侧边栏菜单 -->
+    <string name="menuGood">社区精选</string>
+    <string name="menuNews">新闻资讯</string>
+    <string name="menuStudio">学习教程</string>
+    <string name="menuBlog">社区博客</string>
+
+    <!-- 详情菜单 -->
+    <string name="DetailsGood">太棒了</string>
+    <string name="DetailsBed">一般般</string>
+    <string name="DetailsCollect">收藏</string>
+    <string name="DetailsShare">分享</string>
+    <string name="DetailsDiscuss">评论</string>
+
+    <!-- 用户中心 -->
+    <string name="user_center">个人中心</string>
+    <string name="user_login_alert">你终于来啦，快登录吧</string>
+    <string name="user_key_alert">输入你的密钥</string>
+    <string name="user_bind_btn">绑定</string>
+    <string name="user_alert">请在web端登陆后，寻找你的密钥：\nhttp://my.eoe.cn/admin\n会员中心>资料设置>我的密钥（如下图）</string>
+    <string name="user_button_alert">登陆后，你可以享有以下功能</string>
+    <string name="user_level_alert">社区勋章</string>
+    <string name="user_login_another">换一种方式登录</string>
+    <string name="user_logout">注销</string>
+
+    <!-- 登录 -->
+    <string name="user_title">eoe</string>
+    <string name="user_cancel">取消</string>
+    <string name="user_remember">记住密码</string>
+    <string name="user_enter">立即登录</string>
+    <string name="user_user_empty">用户名不能为空!</string>
+    <string name="user_pwd_empty">密码不能为空!</string>
+    <string name="user_login_prompt">请先登录</string>
+
+    <!-- 上拉下拉 -->
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="press_again_exit">再按一次退出</string>
+
+    <!-- 错误提示 -->
+    <string name="httpError">连接失败</string>
+    <string name="httpisNull">没有网络</string>
+    <string name="user_center_error">请先登录再进入用户中心</string>
+    <string name="user_username">输入用户名</string>
+    <string name="user_pwd">输入密码</string>
+    <string name="user_login_error">用户名或者密码错误!</string>
+    <string name="user_loginKey_error">错误密钥!</string>
+    <string name="user_loginInfo_error">获取信息失败，\n请尝试重新登录。</string>
+    <string name="about">关于我们</string>
+    <string name="about_title">名称:eoe\n版本:1.0.0\n基于:www.eoe.cn</string>
+    <string name="about_intro">[应用简介]\n\teoe客户端是一款专为移动开发者提供帮助的软件。依靠www.eoe.cn开发者社区，将高质量的移动开发资讯、学习教程、代码库等信息提供给移动开发者，以方便大家能更好更快的学习移动开发的相关知识，尽快成长。</string>
+    <string name="about_story">[应用故事]\n\teoe的理念是‘让移动开发更简单’，如何让移动开发者更简单是我们不断思考和探索的，我们认为有组织、有体系的内容对开发者的学习和成长都是最有价值的，于是大家都希望有这么一款让我们零碎时间里学习到最有价值的知识，于是eoe客户端诞生了!</string>
+    <string name="about_thanks">[致谢]\n\teoe客户端里边的内容资源都是由eoe开发者社区的忠实用户所提供的，并由我们eoe易联志远开发进行组织和展示，感谢其中包括的所有人，感谢你们提供的内容，有了你们eoe会更精彩！</string>
+    <string name="about_tontact">联系我们：</string>
+    <string name="about_sina"> \@eoe移动开发者社区</string>
+    <string name="about_weixin"> eoe_cn</string>
+
+    <!-- 详情页面 -->
+    <string name="detail_prompt">写评论</string>
+    <string name="detail_enter">发表</string>
+    <string name="discuss_succeed">发表成功</string>
+    <string name="discuss_fail">发表失败</string>
+    <string name="query_prompt">请输入关键字</string>
+    
+    
+        <!-- 下拉刷新 -->
+    <string name="no_data">暂无数据</string>
+    <string name="no_more_data">暂无更多数据</string>
+    <!-- 下拉刷新 -->
+
+</resources>
