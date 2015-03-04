@@ -39,7 +39,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnLastItemVisibleLis
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-public class PushContentFragment extends PushContentBaseFragment {
+public class ImageListViewFragment extends PushContentBaseFragment {
 
 	private static final String TAG = "PushContentFragment";
 
@@ -58,7 +58,7 @@ public class PushContentFragment extends PushContentBaseFragment {
 	private int headHight;
 
 	public static Fragment newInstance(String tag) {
-		return new PushContentFragment();
+		return new ImageListViewFragment();
 	}
 
 	@Override
@@ -358,7 +358,7 @@ public class PushContentFragment extends PushContentBaseFragment {
 			message = params[0];
 			String type = params[1];
 			try {
-				return PushContentFragment.this.objectQueryImpl();
+				return ImageListViewFragment.this.objectQueryImpl();
 			} catch (Exception e) {
 				exception = e;
 				exception.printStackTrace();

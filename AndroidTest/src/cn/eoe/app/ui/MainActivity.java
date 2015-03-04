@@ -15,12 +15,8 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,25 +39,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.eoe.app.R;
 import cn.eoe.app.adapter.BasePageAdapter;
-import cn.eoe.app.adapter.ProductCatagoryAdapter;
 import cn.eoe.app.biz.BaseDao;
-import cn.eoe.app.biz.BlogsDao;
 import cn.eoe.app.biz.NewsDao;
-import cn.eoe.app.biz.TopDao;
-import cn.eoe.app.biz.WikiDao;
-import cn.eoe.app.config.Constants;
 import cn.eoe.app.db.DBHelper;
 import cn.eoe.app.entity.BlogsResponseEntity;
 import cn.eoe.app.entity.NavigationModel;
 import cn.eoe.app.entity.NewsResponseEntity;
 import cn.eoe.app.entity.WikiResponseEntity;
-import cn.eoe.app.fragment.TestFragment;
+import cn.eoe.app.fragment.ImageListViewFragment;
 import cn.eoe.app.https.NetWorkHelper;
-import cn.eoe.app.indicator.PageIndicator;
 import cn.eoe.app.slidingmenu.SlidingMenu;
 import cn.eoe.app.ui.base.BaseSlidingFragmentActivity;
 import cn.eoe.app.utils.IntentUtil;
-import cn.eoe.app.utils.PopupWindowUtil;
 import cn.eoe.app.widget.CustomButton;
 
 import com.avos.avoscloud.AVUser;
@@ -92,17 +81,16 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private ImageView mImgTv;
 
 	// views
-	private ViewPager mViewPager;
+	//private ViewPager mViewPager;
 	private BasePageAdapter mBasePageAdapter;
-	private PageIndicator mIndicator;
+	//private PageIndicator mIndicator;
 	private LinearLayout loadLayout;
 	private LinearLayout loadFaillayout;
 
 	// init daos
-	private TopDao topDao;
-	private BlogsDao blogsDao;
-	private NewsDao newsDao;
-	private WikiDao wikiDao;
+
+	private NewsDao fashionDao;
+	//private FavorDao;
 
 	private List<Object> categoryList;
 
@@ -128,7 +116,10 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private InputMethodManager imm;
 
 	private boolean isShowPopupWindows = false;
-
+	private FrameLayout mImageListViewFragment;
+	private Fragment mCurrentFragment;
+	
+	private Fragment mImgListViewFrag;
 	// [end]
 
 	// [start]生命周期
@@ -147,7 +138,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		try {
 			DBHelper db = DBHelper.getInstance(this);
@@ -180,7 +170,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		loadLayout = (LinearLayout) findViewById(R.id.view_loading);
 		loadFaillayout = (LinearLayout) findViewById(R.id.view_load_fail);
 		mAboveTitle = (TextView) findViewById(R.id.tv_above_title);
-		mAboveTitle.setText("社区精选");
+		mAboveTitle.setText(getResources().getString(R.string.menu_fashion));
+		
 		imgQuery = (ImageView) findViewById(R.id.imageview_above_query);
 		imgQuery.setOnClickListener(this);
 		imgQuery.setVisibility(View.GONE);
@@ -189,8 +180,11 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		// imgLeft = (ImageView) findViewById(R.id.imageview_above_left);
 		// imgRight = (ImageView) findViewById(R.id.imageview_above_right);
 		// editSearch.setOnKeyListener(onkey);
-		mViewPager = (ViewPager) findViewById(R.id.above_pager);
-		mIndicator = (PageIndicator) findViewById(R.id.above_indicator);
+		
+		//mViewPager = (ViewPager) findViewById(R.id.above_pager);
+		//mIndicator = (PageIndicator) findViewById(R.id.above_indicator);
+		mImageListViewFragment = (FrameLayout) findViewById(R.id.image_list_view_fragment_container);
+		
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
 		llGoHome = (LinearLayout) findViewById(R.id.Linear_above_toHome);
 		imgLogin = (ImageButton) findViewById(R.id.login_login);
@@ -204,77 +198,32 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		mlinear_listview = (LinearLayout) findViewById(R.id.main_linear_listview);
 		mFrameTv = (FrameLayout) findViewById(R.id.fl_off);
 		mImgTv = (ImageView) findViewById(R.id.iv_off);
+		
+		mImgListViewFrag = ImageListViewFragment.newInstance("main_image_list_view"); 
+		changeFragment(mImgListViewFrag);
+		mImageListViewFragment.setVisibility(View.VISIBLE);
+		loadLayout.setVisibility(View.GONE);
+		loadFaillayout.setVisibility(View.GONE);
 	}
 
 	private void initClass() {
-		blogsDao = new BlogsDao(this);
-		newsDao = new NewsDao(this);
-		wikiDao = new WikiDao(this);
-		topDao = new TopDao(this);
-	}
-
-	private static final String[] CONTENT = new String[] { "Recent", "Artists",
-			"Albums", "Songs", "Playlists", "Genres" };
-
-	class GoogleMusicAdapter extends FragmentPagerAdapter {
-		public GoogleMusicAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return TestFragment.newInstance(CONTENT[position % CONTENT.length]);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return CONTENT[position % CONTENT.length].toUpperCase();
-		}
-
-		@Override
-		public int getCount() {
-			return CONTENT.length;
-		}
-	}
-
-	private static final String[] CONTENT1 = new String[] { "R", "A" };
-
-	class GoogleMusicAdapter1 extends FragmentPagerAdapter {
-		public GoogleMusicAdapter1(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return TestFragment
-					.newInstance(CONTENT1[position % CONTENT1.length]);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return CONTENT1[position % CONTENT1.length].toUpperCase();
-		}
-
-		@Override
-		public int getCount() {
-			return CONTENT1.length;
-		}
+		fashionDao = new NewsDao(this);
 	}
 
 	private void initViewPager() {
-		mBasePageAdapter = new BasePageAdapter(MainActivity.this);
-		FragmentPagerAdapter adapter = new GoogleMusicAdapter(
-				getSupportFragmentManager());
-
-		mViewPager.setOffscreenPageLimit(0);
-
-		// mViewPager.setAdapter(mBasePageAdapter);
-		mViewPager.setAdapter(adapter);
-
-		mIndicator.setViewPager(mViewPager);
-
-		mIndicator.setOnPageChangeListener(new MyPageChangeListener());
-		new MyTask().execute(topDao);
+//		mBasePageAdapter = new BasePageAdapter(MainActivity.this);
+//		FragmentStatePagerAdapter adapter = new ProductCatagoryAdapter(
+//				getSupportFragmentManager());
+//
+//		mViewPager.setOffscreenPageLimit(0);
+//
+//		// mViewPager.setAdapter(mBasePageAdapter);
+//		mViewPager.setAdapter(adapter);
+//
+//		mIndicator.setViewPager(mViewPager);
+//		mIndicator.setOnPageChangeListener(new MyPageChangeListener());
+//		
+//		new MyTask().execute(fashionDao);
 	}
 
 	private void initListView() {
@@ -317,17 +266,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				imgQuery.setVisibility(View.VISIBLE);
 				switch (position) {
 				case 0:
-					imgQuery.setVisibility(View.GONE);
-					new MyTask().execute(topDao);
-					break;
-				case 1:
-					new MyTask().execute(newsDao);
-					break;
-				case 2:
-					new MyTask().execute(wikiDao);
-					break;
-				case 3:
-					new MyTask().execute(blogsDao);
+					new MyTask().execute(fashionDao);
 					break;
 				}
 			}
@@ -338,14 +277,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private void initNav() {
 		navs = new ArrayList<NavigationModel>();
 		NavigationModel nav1 = new NavigationModel(getResources().getString(
-				R.string.menuGood), "");
-		NavigationModel nav2 = new NavigationModel(getResources().getString(
-				R.string.menuNews), Constants.TAGS.NEWS_TAG);
-		NavigationModel nav3 = new NavigationModel(getResources().getString(
-				R.string.menuStudio), Constants.TAGS.WIKI_TAG);
-		NavigationModel nav4 = new NavigationModel(getResources().getString(
-				R.string.menuBlog), Constants.TAGS.BLOG_TAG);
-		Collections.addAll(navs, nav1, nav2, nav3, nav4);
+				R.string.menu_fashion), "");
+
+		Collections.addAll(navs, nav1);
 	}
 
 	private void initgoHome() {
@@ -354,22 +288,12 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	private List<Map<String, Object>> getData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuGood));
+		map.put(LIST_TEXT, getResources().getString(R.string.menu_fashion));
 		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_handpick);
 		list.add(map);
-		map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuNews));
-		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_news);
-		list.add(map);
-		map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuStudio));
-		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_studio);
-		list.add(map);
-		map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuBlog));
-		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_blog);
-		list.add(map);
+		
 		return list;
 	}
 
@@ -393,8 +317,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			break;
 		case R.id.imageview_above_more:
 			if (isShowPopupWindows) {
-				new PopupWindowUtil(mViewPager).showActionWindow(v, this,
-						mBasePageAdapter.tabs);
+				//new PopupWindowUtil(mViewPager).showActionWindow(v, this, mBasePageAdapter.tabs);
+				//菜单处理
 			}
 			break;
 		case R.id.imageview_above_query:
@@ -467,7 +391,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
 		super.dispatchTouchEvent(event);
-		if (mIsAnim || mViewPager.getChildCount() <= 1) {
+		if (mIsAnim) {
+		//if (mIsAnim || mViewPager.getChildCount() <= 1) {
 			return false;
 		}
 		final int action = event.getAction();
@@ -541,8 +466,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			// imgLeft.setVisibility(View.GONE);
 			// imgRight.setVisibility(View.GONE);
 			loadLayout.setVisibility(View.VISIBLE);
-			mViewPager.setVisibility(View.GONE);
-			mViewPager.removeAllViews();
+//			mViewPager.setVisibility(View.GONE);
+//			mViewPager.removeAllViews();
 			// mBasePageAdapter.Clear();
 			MainActivity.this.showContent();
 			super.onPreExecute();
@@ -552,9 +477,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		@Override
 		protected Integer doInBackground(BaseDao... params) {
 			BaseDao dao = params[0];
-			if (dao instanceof TopDao) {
-				return 1;
-			} else if (dao instanceof NewsDao) {
+			if (dao instanceof NewsDao) {
 				return 2;
 			}
 
@@ -571,7 +494,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			 * responseData.getList(); categorys = responseData.getCategorys();
 			 * map.put("tabs", categorys); map.put("list", categoryList); } }
 			 * else if (dao instanceof NewsDao) { mTag = 1; if
-			 * ((newsResponseData = newsDao.mapperJson(mUseCache)) != null) {
+			 * ((newsResponseData = fashionDao.mapperJson(mUseCache)) != null) {
 			 * categoryList = (List) newsResponseData.getList(); categorys =
 			 * newsResponseData.getCategorys(); map.put("tabs", categorys);
 			 * map.put("list", categoryList); } } else if (dao instanceof
@@ -585,6 +508,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			return 0;
 		}
 
+		/*
 		@Override
 		protected void onPostExecute(Integer result) {
 			// TODO Auto-generated method stub
@@ -592,24 +516,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			isShowPopupWindows = true;
 			mBasePageAdapter.Clear();
 			mViewPager.removeAllViews();
-			if (result == 0) {
-				/*
-				 * mBasePageAdapter.addFragment((List) result.get("tabs"),
-				 * (List) result.get("list"));
-				 * //imgRight.setVisibility(View.VISIBLE);
-				 * loadLayout.setVisibility(View.GONE);
-				 * loadFaillayout.setVisibility(View.GONE);
-				 */
-			} else if (result == 1) {
-				Log.d(TAG, "addNullFragment");
-
-				mBasePageAdapter.addNullFragment();
-				FragmentPagerAdapter adapter = new GoogleMusicAdapter(
-						getSupportFragmentManager());
-				mViewPager.setAdapter(adapter);
-				loadLayout.setVisibility(View.GONE);
-				// loadFaillayout.setVisibility(View.VISIBLE);
-			} else if (result == 2) {
+			if (result == 2) {
 				Log.d(TAG, "addNullFragment");
 
 				mBasePageAdapter.addNullFragment();
@@ -624,8 +531,14 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 			mBasePageAdapter.notifyDataSetChanged();
 			mViewPager.setCurrentItem(0);
-			mIndicator.notifyDataSetChanged();
+			//mIndicator.notifyDataSetChanged();
 
+		}
+		*/
+		
+		@Override
+		protected void onPostExecute(Integer result) {
+			super.onPostExecute(result);
 		}
 	}
 
@@ -731,4 +644,19 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private float lastX = 0;
 	private float lastY = 0;
 
+	
+	private void changeFragment(Fragment fragment) {
+		if (mCurrentFragment != null) {
+			getSupportFragmentManager().beginTransaction()
+					.detach(mCurrentFragment)
+					.replace(R.id.image_list_view_fragment_container, fragment).attach(fragment)
+					.addToBackStack(null).commit();
+		} else {
+			FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+					.beginTransaction();
+			fragmentTransaction.replace(R.id.image_list_view_fragment_container, fragment);
+			fragmentTransaction.commitAllowingStateLoss();
+		}
+		mCurrentFragment = fragment;
+	}
 }

@@ -31,8 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#666"
-            app:selectedColor="#666" />
+            android:textColor="#666" />
     </FrameLayout>
 
     <include layout="@layout/loading_layout" />
