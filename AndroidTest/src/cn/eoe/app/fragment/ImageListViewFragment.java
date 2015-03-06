@@ -156,9 +156,9 @@ public class ImageListViewFragment extends PushContentBaseFragment {
 			mNormalMediaAdapter = new PushContentAdapter(mActivity,
 					mPushContentList, R.drawable.translucent_background);
 			mListView.setAdapter(mNormalMediaAdapter);
-		} else {
+		} 
 			mNormalMediaAdapter.notifyDataSetChanged();
-		}
+		
 	}
 
 	@Override
