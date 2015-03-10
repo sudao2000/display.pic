@@ -1,15 +1,31 @@
 package cn.eoe.app;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import cn.eoe.app.config.Configs;
+import cn.eoe.app.entity.PushContentEntity;
+import cn.eoe.app.ui.LoginActivity;
+import cn.eoe.app.utils.IntentUtil;
 
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.external.activeandroid.app.Application;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 public class MyApplication extends Application {
+	
+	private static MyApplication instance;
 	public static File cacheDir;
 
 	public static DisplayImageOptions options; // DisplayImageOptions是用于设置图片显示的类
@@ -72,7 +88,55 @@ public class MyApplication extends Application {
 				.build();
 
 		AVOSCloud.initialize(this, Configs.APP_ID, Configs.APP_KEY);
+		
+		getUserLike();
+		instance = this;
+	}
+	
+	public static MyApplication getInstance() {
+		return instance;
+	}
+	
+	public static Set<String> likeList = new HashSet<String>(100); 
+	public static void getUserLike() {
+		
+		likeList.clear();
+		AVUser currentUser = AVUser.getCurrentUser();
+		if (currentUser == null) {
+			return;
+		}
 
+		AVQuery<AVObject> query = new AVQuery<AVObject>("LIKE");
+		query.whereEqualTo("user", AVUser.getCurrentUser());
+		query.findInBackground(new FindCallback<AVObject>() {
+			@Override
+		    public void done(List<AVObject> avObjects, AVException e) {
+		        if (e == null) {
+		            Log.d("成功", "查询到" + avObjects.size() + " 条符合条件的数据");
+		            
+		            if (avObjects != null) {
+						for (AVObject o : avObjects) {
+							likeList.add(o.getString("postId"));
+						}
+					}
+		        } else {
+		            Log.d("失败", "查询错误: " + e.getMessage());
+		        }
+		    }
+		});
+		
+	}
+	
+	public static void removeLikePost(String postId) {
+		if (likeList.contains(postId)) {
+			likeList.remove(postId);
+		}
 	}
 
+	
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+		instance = null;
+	}
 }

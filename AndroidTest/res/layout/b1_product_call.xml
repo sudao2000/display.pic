@@ -13,6 +13,6 @@
         android:layout_gravity="center"
         android:layout_margin="3dp"
         android:layout_weight="1"
-        layout="@layout/gooditem" />
+        layout="@layout/image_item" />
 
 </cn.eoe.app.component.GoodItemCell>

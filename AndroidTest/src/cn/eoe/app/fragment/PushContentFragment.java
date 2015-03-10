@@ -327,6 +327,7 @@ public class PushContentFragment extends PushContentBaseFragment {
 							PushContentEntity pce = new PushContentEntity();
 							pce.setTitle(o.getString("title"));
 							pce.setImg_url(o.getString("img_url"));
+							pce.setRecordId(o.getObjectId());
 							mPushContentList.add(pce);
 						}
 

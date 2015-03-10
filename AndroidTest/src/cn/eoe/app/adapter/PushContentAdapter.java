@@ -26,7 +26,7 @@ public class PushContentAdapter extends BaseAdapterEx<PushContentEntity> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		if (convertView == null) {
-			convertView = parent.inflate(mContext, R.layout.b1_product_cell,
+			convertView = parent.inflate(mContext, R.layout.image_containter_cell,
 					null);
 		}
 

@@ -17,7 +17,7 @@ public class PushContentEntity {
 		return record_id;
 	}
 	public void setRecordId(String recordId) {
-		this.record_id = record_id;
+		this.record_id = recordId;
 	}
 	public String getMessageId() {
 		return message_id;
