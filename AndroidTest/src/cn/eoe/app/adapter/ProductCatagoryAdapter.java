@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import cn.eoe.app.fragment.PushContentFragment;
 
 public class ProductCatagoryAdapter extends FragmentStatePagerAdapter {
-	private static final String[] CONTENT1 = new String[] { "按价格低", "按价格高" };
+	private static final String[] CONTENT1 = new String[] { "image_list_view" };
 
 	public ProductCatagoryAdapter(FragmentManager fm) {
 		super(fm);

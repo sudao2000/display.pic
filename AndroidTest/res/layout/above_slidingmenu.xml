@@ -43,12 +43,7 @@
                 app:selectedColor="#666" />
                 
         </FrameLayout> -->
-		    <cn.eoe.app.indicator.TabPageIndicator
-		        android:id="@+id/above_indicator"
-		        android:layout_height="wrap_content"
-		        android:layout_width="fill_parent"
-		        android:layout_gravity="center"
-		        />
+
 
         
 		        <android.support.v4.view.ViewPager

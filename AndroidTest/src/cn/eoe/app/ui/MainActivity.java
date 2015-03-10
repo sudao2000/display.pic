@@ -94,7 +94,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	// views
 	private ViewPager mViewPager;
 	private BasePageAdapter mBasePageAdapter;
-	private PageIndicator mIndicator;
+	//private PageIndicator mIndicator;
 	private LinearLayout loadLayout;
 	private LinearLayout loadFaillayout;
 
@@ -190,7 +190,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		// imgRight = (ImageView) findViewById(R.id.imageview_above_right);
 		// editSearch.setOnKeyListener(onkey);
 		mViewPager = (ViewPager) findViewById(R.id.above_pager);
-		mIndicator = (PageIndicator) findViewById(R.id.above_indicator);
+		//mIndicator = (PageIndicator) findViewById(R.id.above_indicator);
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
 		llGoHome = (LinearLayout) findViewById(R.id.Linear_above_toHome);
 		imgLogin = (ImageButton) findViewById(R.id.login_login);
@@ -271,10 +271,10 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		// mViewPager.setAdapter(mBasePageAdapter);
 		mViewPager.setAdapter(adapter);
 
-		mIndicator.setViewPager(mViewPager);
+		//mIndicator.setViewPager(mViewPager);
 
-		mIndicator.setOnPageChangeListener(new MyPageChangeListener());
-		new MyTask().execute(topDao);
+		//mIndicator.setOnPageChangeListener(new MyPageChangeListener());
+		new MyTask().execute(newsDao);
 	}
 
 	private void initListView() {
@@ -318,17 +318,17 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				switch (position) {
 				case 0:
 					imgQuery.setVisibility(View.GONE);
-					new MyTask().execute(topDao);
-					break;
-				case 1:
 					new MyTask().execute(newsDao);
 					break;
-				case 2:
-					new MyTask().execute(wikiDao);
-					break;
-				case 3:
-					new MyTask().execute(blogsDao);
-					break;
+//				case 1:
+//					new MyTask().execute(topDao);
+//					break;
+//				case 2:
+//					new MyTask().execute(wikiDao);
+//					break;
+//				case 3:
+//					new MyTask().execute(blogsDao);
+//					break;
 				}
 			}
 		});
@@ -345,7 +345,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				R.string.menuStudio), Constants.TAGS.WIKI_TAG);
 		NavigationModel nav4 = new NavigationModel(getResources().getString(
 				R.string.menuBlog), Constants.TAGS.BLOG_TAG);
-		Collections.addAll(navs, nav1, nav2, nav3, nav4);
+		Collections.addAll(navs, nav1);
 	}
 
 	private void initgoHome() {
@@ -355,21 +355,21 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private List<Map<String, Object>> getData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuGood));
-		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_handpick);
-		list.add(map);
+//		map.put(LIST_TEXT, getResources().getString(R.string.menuGood));
+//		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_handpick);
+//		list.add(map);
 		map = new HashMap<String, Object>();
 		map.put(LIST_TEXT, getResources().getString(R.string.menuNews));
 		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_news);
 		list.add(map);
-		map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuStudio));
-		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_studio);
-		list.add(map);
-		map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuBlog));
-		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_blog);
-		list.add(map);
+//		map = new HashMap<String, Object>();
+//		map.put(LIST_TEXT, getResources().getString(R.string.menuStudio));
+//		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_studio);
+//		list.add(map);
+//		map = new HashMap<String, Object>();
+//		map.put(LIST_TEXT, getResources().getString(R.string.menuBlog));
+//		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_blog);
+//		list.add(map);
 		return list;
 	}
 
@@ -624,47 +624,42 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 			mBasePageAdapter.notifyDataSetChanged();
 			mViewPager.setCurrentItem(0);
-			mIndicator.notifyDataSetChanged();
+			//mIndicator.notifyDataSetChanged();
 
 		}
 	}
 
-	/**
-	 * viewPager切换页面
-	 * 
-	 * @author mingxv
-	 * 
-	 */
-	class MyPageChangeListener implements OnPageChangeListener {
-		@Override
-		public void onPageScrollStateChanged(int arg0) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onPageScrolled(int arg0, float arg1, int arg2) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onPageSelected(int arg0) {
-			// TODO Auto-generated method stub
-			if (arg0 == 0) {
-				getSlidingMenu().setTouchModeAbove(
-						SlidingMenu.TOUCHMODE_FULLSCREEN);
-				// imgLeft.setVisibility(8);
-			} else if (arg0 == mBasePageAdapter.mFragments.size() - 1) {
-				// imgRight.setVisibility(8);
-				getSlidingMenu()
-						.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-			} else {
-				// imgRight.setVisibility(0);
-				// imgLeft.setVisibility(0);
-				getSlidingMenu()
-						.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-			}
-		}
-	}
+//
+//	class MyPageChangeListener implements OnPageChangeListener {
+//		@Override
+//		public void onPageScrollStateChanged(int arg0) {
+//			// TODO Auto-generated method stub
+//		}
+//
+//		@Override
+//		public void onPageScrolled(int arg0, float arg1, int arg2) {
+//			// TODO Auto-generated method stub
+//		}
+//
+//		@Override
+//		public void onPageSelected(int arg0) {
+//			// TODO Auto-generated method stub
+//			if (arg0 == 0) {
+//				getSlidingMenu().setTouchModeAbove(
+//						SlidingMenu.TOUCHMODE_FULLSCREEN);
+//				// imgLeft.setVisibility(8);
+//			} else if (arg0 == mBasePageAdapter.mFragments.size() - 1) {
+//				// imgRight.setVisibility(8);
+//				getSlidingMenu()
+//						.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//			} else {
+//				// imgRight.setVisibility(0);
+//				// imgLeft.setVisibility(0);
+//				getSlidingMenu()
+//						.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//			}
+//		}
+//	}
 
 	class tvOffAnimListener implements AnimationListener {
 
