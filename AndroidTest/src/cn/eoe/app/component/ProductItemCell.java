@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.eoe.app.MyApplication;
 import cn.eoe.app.R;
+import cn.eoe.app.adapter.PushContentAdapter.AnimateFirstDisplayListener;
 import cn.eoe.app.entity.PushContentEntity;
 import cn.eoe.app.ui.LoginActivity;
 import cn.eoe.app.ui.UserCenterActivity;
@@ -144,16 +145,16 @@ public class ProductItemCell extends LinearLayout {
 		imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
 	}
 
-	public void bindData(PushContentEntity pce) {
+	public void bindData(PushContentEntity pce, AnimateFirstDisplayListener animateFirstListener) {
 		init();
 
 		if (null != pce && null != pce.getImg_url()) {
+			animateFirstListener.setDisplayImageView(mainImage);
 			imageLoader.displayImage(pce.getImg_url(), mainImage,
-					MyApplication.options);
+					MyApplication.options, animateFirstListener);
 			postId = pce.getRecord_id();
 			updateLikeUi();
 		}
-
 	}
 
 	private void updateLikeUi() {

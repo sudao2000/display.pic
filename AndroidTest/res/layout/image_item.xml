@@ -7,7 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="match_parent"
         android:background="@drawable/body" >
 
         <LinearLayout
@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/gooditem_photo"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:layout_margin="1.5dp"
                 android:src="@drawable/default_image" />
         </LinearLayout>
