@@ -70,28 +70,27 @@ public class PushContentAdapter extends BaseAdapterEx<PushContentEntity> {
 			imgView = v;
 		}
 		
-		static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-
 		@Override
 		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
+//			if (loadedImage != null) {
+//				ImageView imageView = (ImageView) view;
 //				boolean firstDisplay = !displayedImages.contains(imageUri);
 //				if (firstDisplay) {
 //					FadeInBitmapDisplayer.animate(imageView, 500);
 //					displayedImages.add(imageUri);
 //
 //				}
-				
-				int w = loadedImage.getWidth();
-				int h = loadedImage.getHeight();
-				
-				int displayW = DisplayUtil.getScreenWidth(context);
-				int displayH = h * displayW / w;
-				LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(displayW, displayH);
-				imgView.setLayoutParams(p);
-				imgView.invalidate();
-			}
+//				imageView.setImageBitmap(loadedImage);
+//				int w = loadedImage.getWidth();
+//				int h = loadedImage.getHeight();
+//				
+//				int displayW = DisplayUtil.getScreenWidth(context);
+//				int displayH = h * displayW / w;
+//				LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(displayW, displayH);
+//				imgView.setLayoutParams(p);
+//			}
+	        super.onLoadingComplete(imageUri, view, loadedImage);
+	        imgView.setImageBitmap(loadedImage);
 		}
 	}
 		

@@ -12,10 +12,9 @@
         android:layout_height="@dimen/title_button_height"
         
         android:layout_gravity="center"
-        android:layout_marginRight="5dp"
-        android:src="@drawable/profile_no_avarta_icon"
+        android:layout_marginRight="5dp" 
         android:scaleType="centerInside"
-        android:background="@drawable/back_behind_usershow_style"
+        android:background="@drawable/button_userlogin"
         />
 
 </FrameLayout>

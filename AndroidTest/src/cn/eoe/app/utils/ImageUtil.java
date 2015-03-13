@@ -37,7 +37,7 @@ public class ImageUtil {
 	/**
 	 * 默认图片
 	 */
-	private final static int Default_Img = R.drawable.bg_load_default;
+	private final static int Default_Img = R.drawable.ic_launcher;
 
 	private static Object lock = new Object();
 

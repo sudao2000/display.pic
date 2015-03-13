@@ -10,11 +10,8 @@
     <string name="button_about">关于</string>
 
     <!-- 侧边栏菜单 -->
-    <string name="menuGood">社区精选</string>
-    <string name="menuNews">新闻资讯</string>
-    <string name="menuStudio">学习教程</string>
-    <string name="menuBlog">社区博客</string>
 
+    <string name="menu_wastern_fashion">欧美时尚</string>
     <!-- 详情菜单 -->
     <string name="DetailsGood">太棒了</string>
     <string name="DetailsBed">一般般</string>
@@ -77,7 +74,7 @@
     <string name="query_prompt">请输入关键字</string>
 
        <string name="loading">loading\.\.\.</string>
-    
+
     <!-- ++++++++++++++++++++++++++++++++++++ -->
     
 <string name="lifecycle_all">All</string>
