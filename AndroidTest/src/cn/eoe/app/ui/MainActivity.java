@@ -93,7 +93,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	// views
 	private ViewPager mViewPager;
-	private BasePageAdapter mBasePageAdapter;
+	//private BasePageAdapter mBasePageAdapter;
 	//private PageIndicator mIndicator;
 	private LinearLayout loadLayout;
 	private LinearLayout loadFaillayout;
@@ -180,7 +180,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		loadLayout = (LinearLayout) findViewById(R.id.view_loading);
 		loadFaillayout = (LinearLayout) findViewById(R.id.view_load_fail);
 		mAboveTitle = (TextView) findViewById(R.id.tv_above_title);
-		mAboveTitle.setText("社区精选");
+		mAboveTitle.setText(this.getResources().getString(R.string.menu_wastern_fashion));
 		imgQuery = (ImageView) findViewById(R.id.imageview_above_query);
 		imgQuery.setOnClickListener(this);
 		imgQuery.setVisibility(View.GONE);
@@ -213,63 +213,15 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		topDao = new TopDao(this);
 	}
 
-	private static final String[] CONTENT = new String[] { "Recent", "Artists",
-			"Albums", "Songs", "Playlists", "Genres" };
-
-	class GoogleMusicAdapter extends FragmentPagerAdapter {
-		public GoogleMusicAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return TestFragment.newInstance(CONTENT[position % CONTENT.length]);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return CONTENT[position % CONTENT.length].toUpperCase();
-		}
-
-		@Override
-		public int getCount() {
-			return CONTENT.length;
-		}
-	}
-
-	private static final String[] CONTENT1 = new String[] { "R", "A" };
-
-	class GoogleMusicAdapter1 extends FragmentPagerAdapter {
-		public GoogleMusicAdapter1(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			return TestFragment
-					.newInstance(CONTENT1[position % CONTENT1.length]);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return CONTENT1[position % CONTENT1.length].toUpperCase();
-		}
-
-		@Override
-		public int getCount() {
-			return CONTENT1.length;
-		}
-	}
-
 	private void initViewPager() {
-		mBasePageAdapter = new BasePageAdapter(MainActivity.this);
-		FragmentPagerAdapter adapter = new GoogleMusicAdapter(
-				getSupportFragmentManager());
+//		mBasePageAdapter = new BasePageAdapter(MainActivity.this);
+//		FragmentPagerAdapter adapter = new GoogleMusicAdapter(
+//				getSupportFragmentManager());
 
 		mViewPager.setOffscreenPageLimit(0);
 
 		// mViewPager.setAdapter(mBasePageAdapter);
-		mViewPager.setAdapter(adapter);
+		//mViewPager.setAdapter(adapter);
 
 		//mIndicator.setViewPager(mViewPager);
 
@@ -338,13 +290,13 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private void initNav() {
 		navs = new ArrayList<NavigationModel>();
 		NavigationModel nav1 = new NavigationModel(getResources().getString(
-				R.string.menuGood), "");
-		NavigationModel nav2 = new NavigationModel(getResources().getString(
-				R.string.menuNews), Constants.TAGS.NEWS_TAG);
-		NavigationModel nav3 = new NavigationModel(getResources().getString(
-				R.string.menuStudio), Constants.TAGS.WIKI_TAG);
-		NavigationModel nav4 = new NavigationModel(getResources().getString(
-				R.string.menuBlog), Constants.TAGS.BLOG_TAG);
+				R.string.menu_wastern_fashion), "");
+//		NavigationModel nav2 = new NavigationModel(getResources().getString(
+//				R.string.menuNews), Constants.TAGS.NEWS_TAG);
+//		NavigationModel nav3 = new NavigationModel(getResources().getString(
+//				R.string.menuStudio), Constants.TAGS.WIKI_TAG);
+//		NavigationModel nav4 = new NavigationModel(getResources().getString(
+//				R.string.menuBlog), Constants.TAGS.BLOG_TAG);
 		Collections.addAll(navs, nav1);
 	}
 
@@ -359,7 +311,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 //		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_handpick);
 //		list.add(map);
 		map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuNews));
+		map.put(LIST_TEXT, getResources().getString(R.string.menu_wastern_fashion));
 		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_news);
 		list.add(map);
 //		map = new HashMap<String, Object>();
@@ -393,8 +345,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			break;
 		case R.id.imageview_above_more:
 			if (isShowPopupWindows) {
-				new PopupWindowUtil(mViewPager).showActionWindow(v, this,
-						mBasePageAdapter.tabs);
+//				new PopupWindowUtil(mViewPager).showActionWindow(v, this,
+//						mBasePageAdapter.tabs);
 			}
 			break;
 		case R.id.imageview_above_query:
@@ -590,7 +542,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			isShowPopupWindows = true;
-			mBasePageAdapter.Clear();
 			mViewPager.removeAllViews();
 			if (result == 0) {
 				/*
@@ -601,18 +552,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				 * loadFaillayout.setVisibility(View.GONE);
 				 */
 			} else if (result == 1) {
-				Log.d(TAG, "addNullFragment");
-
-				mBasePageAdapter.addNullFragment();
-				FragmentPagerAdapter adapter = new GoogleMusicAdapter(
-						getSupportFragmentManager());
-				mViewPager.setAdapter(adapter);
-				loadLayout.setVisibility(View.GONE);
-				// loadFaillayout.setVisibility(View.VISIBLE);
 			} else if (result == 2) {
 				Log.d(TAG, "addNullFragment");
-
-				mBasePageAdapter.addNullFragment();
 
 				FragmentStatePagerAdapter adapter = new ProductCatagoryAdapter(
 						getSupportFragmentManager());
@@ -622,7 +563,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			}
 			mViewPager.setVisibility(View.VISIBLE);
 
-			mBasePageAdapter.notifyDataSetChanged();
 			mViewPager.setCurrentItem(0);
 			//mIndicator.notifyDataSetChanged();
 

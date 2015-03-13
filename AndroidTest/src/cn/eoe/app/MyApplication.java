@@ -1,7 +1,6 @@
 package cn.eoe.app;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,9 +8,6 @@ import java.util.Set;
 import android.graphics.Bitmap;
 import android.util.Log;
 import cn.eoe.app.config.Configs;
-import cn.eoe.app.entity.PushContentEntity;
-import cn.eoe.app.ui.LoginActivity;
-import cn.eoe.app.utils.IntentUtil;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVOSCloud;
@@ -20,7 +16,6 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.external.activeandroid.app.Application;
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 public class MyApplication extends Application {
@@ -78,14 +73,29 @@ public class MyApplication extends Application {
 				// .displayer(new RoundedBitmapDisplayer(20)) // 设置成圆角图片
 				.bitmapConfig(Bitmap.Config.RGB_565).build();
 
-		options_head = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.profile_no_avarta_icon) // 设置图片下载期间显示的图片
-				.showImageForEmptyUri(R.drawable.profile_no_avarta_icon) // 设置图片Uri为空或是错误的时候显示的图片
-				.showImageOnFail(R.drawable.profile_no_avarta_icon) // 设置图片加载或解码过程中发生错误显示的图片
-				.cacheInMemory(true) // 设置下载的图片是否缓存在内存中
-				.cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
-				// .displayer(new RoundedBitmapDisplayer(30)) // 设置成圆角图片
-				.build();
+		
+//		options = new DisplayImageOptions.Builder()
+//		  //.showImageOnLoading(R.drawable.ic_stub) // resource or drawable
+//		  .showImageForEmptyUri(R.drawable.default_image) // resource or drawable
+//		  .showImageOnFail(R.drawable.default_image) // resource or drawable
+//		  .resetViewBeforeLoading(false)  // default
+//		  .delayBeforeLoading(1000)
+//		  .cacheInMemory(false) // default
+//		  .cacheOnDisc(true) // default
+//		  .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+//		  .bitmapConfig(Bitmap.Config.ARGB_8888)
+//		  .displayer(new SimpleBitmapDisplayer()) // default
+//		  .handler(new Handler()) // default
+//		  .build();
+		
+//		options_head = new DisplayImageOptions.Builder()
+//				.showStubImage(R.drawable.profile_no_avarta_icon) // 设置图片下载期间显示的图片
+//				.showImageForEmptyUri(R.drawable.profile_no_avarta_icon) // 设置图片Uri为空或是错误的时候显示的图片
+//				.showImageOnFail(R.drawable.profile_no_avarta_icon) // 设置图片加载或解码过程中发生错误显示的图片
+//				.cacheInMemory(true) // 设置下载的图片是否缓存在内存中
+//				.cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
+//				// .displayer(new RoundedBitmapDisplayer(30)) // 设置成圆角图片
+//				.build();
 
 		AVOSCloud.initialize(this, Configs.APP_ID, Configs.APP_KEY);
 		

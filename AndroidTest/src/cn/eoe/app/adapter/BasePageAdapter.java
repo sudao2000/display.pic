@@ -12,10 +12,7 @@ import cn.eoe.app.entity.BlogsCategoryListEntity;
 import cn.eoe.app.entity.CategorysEntity;
 import cn.eoe.app.entity.NewsCategoryListEntity;
 import cn.eoe.app.entity.WikiCategoryListEntity;
-import cn.eoe.app.fragment.BlogFragment;
 import cn.eoe.app.fragment.HttpErrorFragment;
-import cn.eoe.app.fragment.NewsFragment;
-import cn.eoe.app.fragment.WikiFragment;
 
 public class BasePageAdapter extends FragmentStatePagerAdapter {
 
