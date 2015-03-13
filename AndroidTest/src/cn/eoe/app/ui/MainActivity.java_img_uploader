@@ -64,7 +64,10 @@ import cn.eoe.app.utils.IntentUtil;
 import cn.eoe.app.utils.PopupWindowUtil;
 import cn.eoe.app.widget.CustomButton;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.feedback.ThreadActivity;
 
 public class MainActivity extends BaseSlidingFragmentActivity implements
@@ -143,6 +146,20 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		initListView();
 		initgoHome();
 		initNav();
+		
+		AVObject gameScore = new AVObject("product");
+		gameScore.put("img_url", "dddddddddddddddddddddddddddddddddd");
+		gameScore.put("title", "dddddddddddddddddddddddddddddddddd");
+
+		gameScore.saveInBackground(new SaveCallback() {
+		    public void done(AVException e) {
+		        if (e == null) {
+		            // 保存成功
+		        } else {
+		            // 保存失败，输出错误信息
+		        }
+		    }
+		});
 	}
 
 	@Override
@@ -288,7 +305,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				// TODO Auto-generated method stub.
 				View view = super.getView(position, convertView, parent);
 				if (position == mTag) {
-					//view.setBackgroundResource(R.drawable.back_behind_list);
+					view.setBackgroundResource(R.drawable.back_behind_list);
 					lvTitle.setTag(view);
 				} else {
 					view.setBackgroundColor(Color.TRANSPARENT);
@@ -467,9 +484,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
 		super.dispatchTouchEvent(event);
-		if (mIsAnim || mViewPager.getChildCount() <= 1) {
-			return false;
-		}
+//		if (mIsAnim || mViewPager.getChildCount() <= 1) {
+//			return false;
+//		}
 		final int action = event.getAction();
 
 		float x = event.getX();

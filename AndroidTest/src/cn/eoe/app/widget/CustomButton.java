@@ -56,7 +56,7 @@ public class CustomButton extends RelativeLayout {
 				LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		tv.setTextColor(this.getResources().getColor(R.color.black));
+		tv.setTextColor(this.getResources().getColor(R.color.white));
 		tv.setTextSize(TypedValue.COMPLEX_UNIT_PX,this.getResources().getDimensionPixelSize(R.dimen.title_text_size));
 		tv.setLayoutParams(params);
 		tv.setId(textid);

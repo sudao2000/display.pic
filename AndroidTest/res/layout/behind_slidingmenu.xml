@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dadada"
+    android:background="@drawable/back_behind_menu"
     android:orientation="vertical" >
 
     <include layout="@layout/behind_title" />
@@ -23,8 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/ad_height"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/bottom_button_height"
-         >
+        android:layout_marginBottom="@dimen/bottom_button_height" >
+        
+
     </FrameLayout>
 
     <LinearLayout
