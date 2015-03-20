@@ -310,12 +310,13 @@ public class PushContentFragment extends PushContentBaseFragment {
 			reLoadData();
 		}
 	}
-
+	
 	private void ProductListQueryAsync() {
 		AVQuery<AVObject> query = new AVQuery<AVObject>("product");
 
 		query.setSkip((mCurrentPage - 1) * pageSize);
 		query.setLimit(pageSize);
+		query.setOrder("sequence");
 
 		query.findInBackground(new FindCallback<AVObject>() {
 			@Override
@@ -323,12 +324,16 @@ public class PushContentFragment extends PushContentBaseFragment {
 				if (e == null) {
 
 					if (obj != null) {
+						if (mCurrentPage == 1) {
+							mPushContentList.clear();
+						}
+						
 						for (AVObject o : obj) {
 							PushContentEntity pce = new PushContentEntity();
 							pce.setTitle(o.getString("title"));
 							pce.setImg_url(o.getString("img_url"));
 							pce.setRecordId(o.getObjectId());
-							mPushContentList.add(pce);
+							mPushContentList.add(pce);						
 						}
 
 						mDasHandler.onSuccess(obj);
