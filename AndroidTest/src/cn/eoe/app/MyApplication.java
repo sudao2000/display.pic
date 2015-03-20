@@ -107,7 +107,7 @@ public class MyApplication extends Application {
 		return instance;
 	}
 	
-	public static Set<String> likeList = new HashSet<String>(100); 
+	public static Set<String> likeList = new HashSet<String>(100);
 	public static void getUserLike() {
 		
 		likeList.clear();
@@ -141,6 +141,10 @@ public class MyApplication extends Application {
 		if (likeList.contains(postId)) {
 			likeList.remove(postId);
 		}
+	}
+	
+	public static void clearLocalUserLike() {
+		likeList.clear();
 	}
 
 	

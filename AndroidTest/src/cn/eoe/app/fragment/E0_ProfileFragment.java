@@ -30,6 +30,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.eoe.app.MyApplication;
 import cn.eoe.app.R;
 import cn.eoe.app.ui.F0_AddressListActivity;
 import cn.eoe.app.ui.LoginActivity;
@@ -369,6 +370,9 @@ public class E0_ProfileFragment extends Fragment implements IXListViewListener,
 		case R.id.profile_logout:
 			AVUser.logOut();
 			IntentUtil.start_activity(getActivity(), LoginActivity.class);
+			
+			MyApplication.clearLocalUserLike();
+			
 			getActivity().finish();
 			break;
 		}

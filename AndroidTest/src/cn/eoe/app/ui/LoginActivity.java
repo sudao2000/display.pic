@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import cn.eoe.app.MyApplication;
 import cn.eoe.app.R;
 
 import com.avos.avoscloud.AVAnalytics;
@@ -74,6 +75,9 @@ public class LoginActivity extends UserLoginBaseActivity {
 						Intent mainIntent = new Intent(activity,
 								MainActivity.class);
 						startActivity(mainIntent);
+						
+						MyApplication.getUserLike();
+						
 						activity.finish();
 					} else {
 						progressDialogDismiss();
