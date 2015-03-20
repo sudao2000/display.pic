@@ -70,7 +70,7 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.feedback.ThreadActivity;
 
-public class MainActivity extends BaseSlidingFragmentActivity implements
+public class ImgUploader extends BaseSlidingFragmentActivity implements
 		OnClickListener, AnimationListener {
 	private final String LIST_TEXT = "text";
 	private final String LIST_IMAGEVIEW = "img";
@@ -279,7 +279,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	}
 
 	private void initViewPager() {
-		mBasePageAdapter = new BasePageAdapter(MainActivity.this);
+		mBasePageAdapter = new BasePageAdapter(ImgUploader.this);
 		FragmentPagerAdapter adapter = new GoogleMusicAdapter(
 				getSupportFragmentManager());
 
@@ -323,7 +323,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				current_page = navModel.getTags();
 				if (lvTitle.getTag() != null) {
 					if (lvTitle.getTag() == view) {
-						MainActivity.this.showContent();
+						ImgUploader.this.showContent();
 						return;
 					}
 					((View) lvTitle.getTag())
@@ -355,13 +355,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private void initNav() {
 		navs = new ArrayList<NavigationModel>();
 		NavigationModel nav1 = new NavigationModel(getResources().getString(
-				R.string.menuGood), "");
-		NavigationModel nav2 = new NavigationModel(getResources().getString(
-				R.string.menuNews), Constants.TAGS.NEWS_TAG);
-		NavigationModel nav3 = new NavigationModel(getResources().getString(
-				R.string.menuStudio), Constants.TAGS.WIKI_TAG);
-		NavigationModel nav4 = new NavigationModel(getResources().getString(
-				R.string.menuBlog), Constants.TAGS.BLOG_TAG);
+				R.string.menu_wastern_fashion), "");
+
 		Collections.addAll(navs, nav1);
 	}
 
@@ -376,7 +371,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 //		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_handpick);
 //		list.add(map);
 		map = new HashMap<String, Object>();
-		map.put(LIST_TEXT, getResources().getString(R.string.menuNews));
+		map.put(LIST_TEXT, getResources().getString(R.string.menu_wastern_fashion));
 		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_news);
 		list.add(map);
 //		map = new HashMap<String, Object>();
@@ -416,7 +411,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			break;
 		case R.id.imageview_above_query:
 
-			if (NetWorkHelper.isNetworkAvailable(MainActivity.this)) {
+			if (NetWorkHelper.isNetworkAvailable(ImgUploader.this)) {
 				IntentUtil.start_activity(this, SearchActivity.class,
 						new BasicNameValuePair("tag", current_page));
 			} else {
@@ -450,7 +445,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				mFrameTv.setVisibility(0);
 				mImgTv.setVisibility(0);
 				Animation anim = AnimationUtils.loadAnimation(
-						MainActivity.this, R.anim.tv_off);
+						ImgUploader.this, R.anim.tv_off);
 				anim.setAnimationListener(new tvOffAnimListener());
 				mImgTv.startAnimation(anim);
 
@@ -505,15 +500,15 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			lastX = x;
 			if (dX < 8 && dY > 8 && !mIsTitleHide && !down) {
 				Animation anim = AnimationUtils.loadAnimation(
-						MainActivity.this, R.anim.push_top_in);
+						ImgUploader.this, R.anim.push_top_in);
 				// anim.setFillAfter(true);
-				anim.setAnimationListener(MainActivity.this);
+				anim.setAnimationListener(ImgUploader.this);
 				title.startAnimation(anim);
 			} else if (dX < 8 && dY > 8 && mIsTitleHide && down) {
 				Animation anim = AnimationUtils.loadAnimation(
-						MainActivity.this, R.anim.push_top_out);
+						ImgUploader.this, R.anim.push_top_out);
 				// anim.setFillAfter(true);
-				anim.setAnimationListener(MainActivity.this);
+				anim.setAnimationListener(ImgUploader.this);
 				title.startAnimation(anim);
 			} else {
 				return false;
@@ -561,7 +556,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			mViewPager.setVisibility(View.GONE);
 			mViewPager.removeAllViews();
 			// mBasePageAdapter.Clear();
-			MainActivity.this.showContent();
+			ImgUploader.this.showContent();
 			super.onPreExecute();
 			isShowPopupWindows = false;
 		}
