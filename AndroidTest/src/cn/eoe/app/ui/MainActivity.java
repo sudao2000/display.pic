@@ -1,5 +1,7 @@
 package cn.eoe.app.ui;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,12 +16,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -42,29 +40,27 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.eoe.app.R;
-import cn.eoe.app.adapter.BasePageAdapter;
 import cn.eoe.app.adapter.ProductCatagoryAdapter;
 import cn.eoe.app.biz.BaseDao;
 import cn.eoe.app.biz.BlogsDao;
 import cn.eoe.app.biz.NewsDao;
 import cn.eoe.app.biz.TopDao;
 import cn.eoe.app.biz.WikiDao;
-import cn.eoe.app.config.Constants;
 import cn.eoe.app.db.DBHelper;
 import cn.eoe.app.entity.BlogsResponseEntity;
 import cn.eoe.app.entity.NavigationModel;
 import cn.eoe.app.entity.NewsResponseEntity;
 import cn.eoe.app.entity.WikiResponseEntity;
-import cn.eoe.app.fragment.TestFragment;
 import cn.eoe.app.https.NetWorkHelper;
-import cn.eoe.app.indicator.PageIndicator;
 import cn.eoe.app.slidingmenu.SlidingMenu;
 import cn.eoe.app.ui.base.BaseSlidingFragmentActivity;
 import cn.eoe.app.utils.IntentUtil;
-import cn.eoe.app.utils.PopupWindowUtil;
 import cn.eoe.app.widget.CustomButton;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.feedback.ThreadActivity;
 
 public class MainActivity extends BaseSlidingFragmentActivity implements
@@ -204,6 +200,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		mlinear_listview = (LinearLayout) findViewById(R.id.main_linear_listview);
 		mFrameTv = (FrameLayout) findViewById(R.id.fl_off);
 		mImgTv = (ImageView) findViewById(R.id.iv_off);
+		
+		getFromAssets("img.url", "radiocity");
 	}
 
 	private void initClass() {
@@ -287,6 +285,37 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	}
 
+
+
+	 public void getFromAssets(String fileName, String title){ 
+           try { 
+                InputStreamReader inputReader = new InputStreamReader( getResources().getAssets().open(fileName) ); 
+               BufferedReader bufReader = new BufferedReader(inputReader);
+               String line="";
+               String Result="";
+               while((line = bufReader.readLine()) != null) {
+           		AVObject gameScore = new AVObject("product");
+           		gameScore.put("img_url", line);
+           		gameScore.put("title", title);
+           		//gameScore.save();
+           		
+           		gameScore.saveInBackground(new SaveCallback() {
+           		    public void done(AVException e) {
+           		        if (e == null) {
+           		            // 保存成功
+           		        } else {
+           		            // 保存失败，输出错误信息
+           		        }
+           		    }
+           		});
+               }
+
+           } catch (Exception e) { 
+               e.printStackTrace(); 
+           }
+           
+	    }
+	 
 	private void initNav() {
 		navs = new ArrayList<NavigationModel>();
 		NavigationModel nav1 = new NavigationModel(getResources().getString(
