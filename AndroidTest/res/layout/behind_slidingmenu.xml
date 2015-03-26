@@ -49,8 +49,6 @@
             android:clickable="true" 
             android:visibility="gone">
         </cn.eoe.app.widget.CustomButton>
-
-        <include layout="@layout/merge_verticalside" />
         
         <cn.eoe.app.widget.CustomButton
             android:id="@+id/cbFeedback"
