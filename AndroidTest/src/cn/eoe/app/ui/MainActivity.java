@@ -201,7 +201,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		mFrameTv = (FrameLayout) findViewById(R.id.fl_off);
 		mImgTv = (ImageView) findViewById(R.id.iv_off);
 		
-		getFromAssets("img.url", "radiocity");
+		//getFromAssets("img.url", "radiocity");
 	}
 
 	private void initClass() {
@@ -270,9 +270,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 					imgQuery.setVisibility(View.GONE);
 					new MyTask().execute(newsDao);
 					break;
-//				case 1:
-//					new MyTask().execute(topDao);
-//					break;
+				case 1:
+					new MyTask().execute(topDao);
+					break;
 //				case 2:
 //					new MyTask().execute(wikiDao);
 //					break;
@@ -320,13 +320,13 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		navs = new ArrayList<NavigationModel>();
 		NavigationModel nav1 = new NavigationModel(getResources().getString(
 				R.string.menu_wastern_fashion), "");
-//		NavigationModel nav2 = new NavigationModel(getResources().getString(
-//				R.string.menuNews), Constants.TAGS.NEWS_TAG);
+		NavigationModel nav2 = new NavigationModel(getResources().getString(
+				R.string.menu_favorite), "");
 //		NavigationModel nav3 = new NavigationModel(getResources().getString(
 //				R.string.menuStudio), Constants.TAGS.WIKI_TAG);
 //		NavigationModel nav4 = new NavigationModel(getResources().getString(
 //				R.string.menuBlog), Constants.TAGS.BLOG_TAG);
-		Collections.addAll(navs, nav1);
+		Collections.addAll(navs, nav1, nav2);
 	}
 
 	private void initgoHome() {
@@ -343,10 +343,11 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		map.put(LIST_TEXT, getResources().getString(R.string.menu_wastern_fashion));
 		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_news);
 		list.add(map);
-//		map = new HashMap<String, Object>();
-//		map.put(LIST_TEXT, getResources().getString(R.string.menuStudio));
-//		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_studio);
-//		list.add(map);
+		
+		map = new HashMap<String, Object>();
+		map.put(LIST_TEXT, getResources().getString(R.string.menu_favorite));
+		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_news);
+		list.add(map);
 //		map = new HashMap<String, Object>();
 //		map.put(LIST_TEXT, getResources().getString(R.string.menuBlog));
 //		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_blog);
@@ -534,9 +535,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		protected Integer doInBackground(BaseDao... params) {
 			BaseDao dao = params[0];
 			if (dao instanceof TopDao) {
-				return 1;
-			} else if (dao instanceof NewsDao) {
 				return 2;
+			} else if (dao instanceof NewsDao) {
+				return 1;
 			}
 
 			/*
@@ -572,23 +573,18 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			super.onPostExecute(result);
 			isShowPopupWindows = true;
 			mViewPager.removeAllViews();
-			if (result == 0) {
-				/*
-				 * mBasePageAdapter.addFragment((List) result.get("tabs"),
-				 * (List) result.get("list"));
-				 * //imgRight.setVisibility(View.VISIBLE);
-				 * loadLayout.setVisibility(View.GONE);
-				 * loadFaillayout.setVisibility(View.GONE);
-				 */
-			} else if (result == 1) {
-			} else if (result == 2) {
-				Log.d(TAG, "addNullFragment");
-
+			if (result == 2) {
 				FragmentStatePagerAdapter adapter = new ProductCatagoryAdapter(
 						getSupportFragmentManager());
 				mViewPager.setAdapter(adapter);
 				loadLayout.setVisibility(View.GONE);
-				// loadFaillayout.setVisibility(View.VISIBLE);
+				loadFaillayout.setVisibility(View.GONE);
+			} else if (result == 1) {
+				FragmentStatePagerAdapter adapter = new ProductCatagoryAdapter(
+						getSupportFragmentManager());
+				mViewPager.setAdapter(adapter);
+				loadLayout.setVisibility(View.GONE);
+				loadFaillayout.setVisibility(View.GONE);
 			}
 			mViewPager.setVisibility(View.VISIBLE);
 

@@ -1,7 +1,5 @@
 package cn.eoe.app.adapter;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
@@ -9,11 +7,9 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import cn.eoe.app.R;
 import cn.eoe.app.component.ProductItemCell;
 import cn.eoe.app.entity.PushContentEntity;
-import cn.eoe.app.utils.DisplayUtil;
 
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 

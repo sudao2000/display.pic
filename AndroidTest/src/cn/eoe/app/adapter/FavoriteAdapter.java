@@ -5,10 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import cn.eoe.app.fragment.PushContentFragment;
 
-public class ProductCatagoryAdapter extends FragmentStatePagerAdapter {
-	private static final String TAG = ProductCatagoryAdapter.class.getSimpleName();
-
-	public ProductCatagoryAdapter(FragmentManager fm) {
+public class FavoriteAdapter extends FragmentStatePagerAdapter {
+	private static final String TAG = FavoriteAdapter.class.getSimpleName();
+	public FavoriteAdapter(FragmentManager fm) {
 		super(fm);
 	}
 

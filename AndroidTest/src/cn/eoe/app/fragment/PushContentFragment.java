@@ -23,6 +23,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import cn.eoe.app.R;
 import cn.eoe.app.adapter.BaseAdapterEx;
+import cn.eoe.app.adapter.FavoriteAdapter;
+import cn.eoe.app.adapter.ProductCatagoryAdapter;
 import cn.eoe.app.adapter.BaseAdapterEx.IGetViewCallback;
 import cn.eoe.app.adapter.PushContentAdapter;
 import cn.eoe.app.das.FSHandler.SuccessResp;
@@ -56,9 +58,14 @@ public class PushContentFragment extends PushContentBaseFragment {
 	private int lastLoadPos = 0;
 	private int headWidth;
 	private int headHight;
+	private String tag;
+
+	public PushContentFragment(String t) {
+		tag = t;
+	}
 
 	public static Fragment newInstance(String tag) {
-		return new PushContentFragment();
+		return new PushContentFragment(tag);
 	}
 
 	@Override
@@ -311,7 +318,11 @@ public class PushContentFragment extends PushContentBaseFragment {
 		}
 	}
 	
-	private void ProductListQueryAsync() {
+	private void loadFavoriteListView() {
+		
+	}
+	
+	private void loadMainListView() {
 		AVQuery<AVObject> query = new AVQuery<AVObject>("product");
 
 		query.setSkip((mCurrentPage - 1) * pageSize);
@@ -345,6 +356,14 @@ public class PushContentFragment extends PushContentBaseFragment {
 				}
 			}
 		});
+	}
+	
+	private void ProductListQueryAsync() {
+		if (tag.equals(ProductCatagoryAdapter.class.getSimpleName())) {
+			loadMainListView();
+		} else if (tag.equals(FavoriteAdapter.class.getSimpleName())) {
+			loadFavoriteListView();
+		}
 	}
 
 	private ArrayList<PushContentEntity> objectQueryImpl() throws Exception {

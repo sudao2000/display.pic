@@ -12,6 +12,8 @@
     <!-- 侧边栏菜单 -->
 
     <string name="menu_wastern_fashion">欧美时尚</string>
+    <string name="menu_favorite">我的收藏</string>
+    
     <!-- 详情菜单 -->
     <string name="DetailsGood">太棒了</string>
     <string name="DetailsBed">一般般</string>
